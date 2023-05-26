@@ -1,0 +1,22 @@
+<%- include('../partials/header'); -%>
+
+<div class = "container" >
+
+    <div class = "row text-center" style = "display:flex; flex-wrap: wrap;">
+        <% user.trips.forEach(trip => { %>
+            <div class = "cl-md-3 col-sm-6">
+                <div class = "caption" >
+                   <h4><%= trip.name %></h4>
+                    <div class = "thumbnail">
+                        <p><%= trip.description %></p>
+                    </div>
+                    <p>
+                        <a href="/trips/<%= trip._id %>" class="btn btn-primary">Посмотреть</a>
+                    </p>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<%- include('../partials/footer'); -%>

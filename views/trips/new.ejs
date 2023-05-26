@@ -1,0 +1,146 @@
+<%- include('../partials/header'); -%>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAGS5W7VthrD-ZNWMATPfU-UdIRUG5h2ok"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col-2">
+            <div>
+                <div><strong>Конфигурация</strong>
+                </div>
+                <div>
+                    Тип путешествия
+                    <select id="travel-type">
+                        <option value="DRIVING">Машина</option>
+                        <option value="BICYCLING">Велосипед</option>
+                        <option value="WALKING">Пешком</option>
+                    </select>
+                </div>
+                <hr>
+               <div>
+                   Избегать шоссе :
+                   <select id="avoid-highways">
+                       <option value="1">Да</option>
+                       <option value="0" selected="selected">Нет</option>
+                   </select>
+               </div>
+                <hr>
+                <div>
+                    Размер популяции
+                        <select id="population-size">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50" selected="selected">50</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                        </select>
+                </div>
+                <hr>
+                <div>Значение мутаций
+                    <select id="mutation-rate">
+                        <option value="0.00">0.00</option>
+                        <option value="0.05">0.01</option>
+                        <option value="0.05">0.05</option>
+                        <option value="0.1" selected="selected">0.1</option>
+                        <option value="0.2">0.2</option>
+                        <option value="0.4">0.4</option>
+                        <option value="0.7">0.7</option>
+                        <option value="1">1.0</option>
+                    </select>
+                </div>
+                <hr>
+                <div>Значение кроссовера
+                    <select id="crossover-rate">
+                        <option value="0.0">0.0</option>
+                        <option value="0.1">0.1</option>
+                        <option value="0.2">0.2</option>
+                        <option value="0.3">0.3</option>
+                        <option value="0.4">0.4</option>
+                        <option value="0.5" selected="selected">0.5</option>
+                        <option value="0.6">0.6</option>
+                        <option value="0.7">0.7</option>
+                        <option value="0.8">0.8</option>
+                        <option value="0.9">0.9</option>
+                        <option value="1">1.0</option>
+                    </select>
+                </div>
+                <hr>
+                <div>
+                    Элитарность
+                    <select id="elitism">
+                        <option value="1" selected="selected">Да</option>
+                        <option value="0">Нет</option>
+                    </select>
+                </div>
+                <hr>
+                <div>
+                    Максимум поколений
+                    <select id="generations">
+                        <option value="20">20</option>
+                        <option value="50" selected="selected">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <hr>
+                <div>
+                    <strong>Информация по работе алгоритма</strong>
+                    <br>
+                    Количество точек
+                    <span id="destinations-count" >0</span>
+                </div>
+                <div class="ga-info" style="display:none;">
+                    Кол-во поколений:
+                    <span id="generations-passed"></span>
+                    <br>
+                    Лучшее время в пути:
+                    <span id="best-time">?</span>
+                </div>
+                <div id="ga-buttons">
+                    <button id="find-route" class="btn btn-outline-warning" type="button">Начать</button>
+                    <button id="clear-map" class="btn btn-outline-info" type="button">Очистить</button>
+                    <button id="draw" class="btn btn-outline-success" type="button">График Алгоритма</button>
+                    <button id="drawFalse" class="btn btn-outline-danger" type="button">Спрятать график</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div id="map-canvas" style="width:100%; height:650px;"> </div>
+        </div>
+        <div class="col-2">
+            <div  class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary" style="width: 100%;">
+                <main class="d-flex flex-nowrap">
+                    <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary" style="width: 100%; height: 650px">
+                        <div id="directionsPanel" class="list-group list-group-flush border-bottom scrollarea"></div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <canvas id="myChart" style="display: none; height: 200px"></canvas>
+        </div>
+    </div>
+    <div class = "row">
+        <h1>Сохранить</h1>
+        <form action="/trips" method="POST">
+            <div class = "form-group">
+                <input class="form-control"  type="text" name="name"  placeholder="Название путешествия">
+            </div>
+            <div class = "form-group">
+                <textarea class="form-control" id="trip_name" type="text" name="description" placeholder="Описание путешествия"></textarea>
+            </div>
+                <textarea id="optimal-route" class="form-control" name="googleRequest" style="display: none"></textarea>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-outline-success">Сохранить</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/new.js" type="text/javascript"></script>
+
+
+<%- include('../partials/footer'); -%>

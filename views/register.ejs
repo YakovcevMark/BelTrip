@@ -1,0 +1,18 @@
+<%- include('partials/header'); -%>
+<div class="container">
+    <h1>Регистрация аккаунта</h1>
+    <form action="/register" method="POST">
+        <div class="mb-2">
+            <label for="username" class="form-label">Имя</label>
+            <input type="text" class="form-control" name="username" placeholder="Имя аккаунта">
+        </div>
+        <div class="mb-2">
+            <label for="password" class="form-label">Пароль</label>
+            <input type="password" class="form-control" name="password" placeholder="Пароль">
+        </div>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-success">Создать аккаунт</button>
+        </div>
+    </form>
+</div>
+<%- include('partials/footer'); -%>
